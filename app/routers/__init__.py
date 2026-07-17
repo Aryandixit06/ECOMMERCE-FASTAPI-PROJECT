@@ -1,0 +1,11 @@
+from .product import router as product_router
+from .auth import router as auth_router
+from .category import router as category_router
+from .cart import router as cart_router
+from .order import router as order_router
+from .wishlist import router as wishlist_router
+from .review import router as review_router
+from .address import router as address_router
+from .coupon import router as coupon_router
+from .checkout import router as checkout_router
+from .payment import router as payment_router
