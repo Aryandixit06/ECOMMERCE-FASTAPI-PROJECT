@@ -18,6 +18,10 @@ class ProductRepository:
             price=product.price,
             stock=product.stock,
             is_active=product.is_active,
+            image_url=product.image_url,
+            brand=product.brand,
+            rating=product.rating,
+            discount_percentage=product.discount_percentage,
             category_id=product.category_id,
         )
 
@@ -42,9 +46,7 @@ class ProductRepository:
     ):
         query = db.query(Product)
 
-        # -----------------------
         # Search Filter
-        # -----------------------
         if search:
             query = query.filter(
                 or_(
@@ -53,41 +55,22 @@ class ProductRepository:
                 )
             )
 
-        # -----------------------
         # Category Filter
-        # -----------------------
         if category_id is not None:
-            query = query.filter(
-                Product.category_id == category_id
-            )
+            query = query.filter(Product.category_id == category_id)
 
-        # -----------------------
-        # Minimum Price Filter
-        # -----------------------
+        # Price Filters
         if min_price is not None:
-            query = query.filter(
-                Product.price >= min_price
-            )
+            query = query.filter(Product.price >= min_price)
 
-        # -----------------------
-        # Maximum Price Filter
-        # -----------------------
         if max_price is not None:
-            query = query.filter(
-                Product.price <= max_price
-            )
+            query = query.filter(Product.price <= max_price)
 
-        # -----------------------
         # Stock Filter
-        # -----------------------
         if in_stock:
-            query = query.filter(
-                Product.stock > 0
-            )
+            query = query.filter(Product.stock > 0)
 
-        # -----------------------
         # Sorting
-        # -----------------------
         if hasattr(Product, sort_by):
             column = getattr(Product, sort_by)
 
@@ -96,15 +79,11 @@ class ProductRepository:
             else:
                 query = query.order_by(column.desc())
 
-        # -----------------------
         # Pagination
-        # -----------------------
         skip = (page - 1) * limit
 
-        # Total Records
         total = query.count()
 
-        # Current Page Records
         products = (
             query
             .offset(skip)
