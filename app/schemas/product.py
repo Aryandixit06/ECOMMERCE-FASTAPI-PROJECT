@@ -7,6 +7,12 @@ class ProductBase(BaseModel):
     price: float
     stock: int
     is_active: bool = True
+
+    image_url: str | None = None
+    brand: str | None = None
+    rating: float = 0.0
+    discount_percentage: int = 0
+
     category_id: int
 
 
@@ -20,6 +26,12 @@ class ProductUpdate(BaseModel):
     price: float | None = None
     stock: int | None = None
     is_active: bool | None = None
+
+    image_url: str | None = None
+    brand: str | None = None
+    rating: float | None = None
+    discount_percentage: int | None = None
+
     category_id: int | None = None
 
 

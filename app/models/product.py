@@ -6,7 +6,6 @@ from app.core.database import Base
 
 class Product(Base):
     __tablename__ = "products"
-
     id = Column(Integer, primary_key=True, index=True)
 
     name = Column(String, index=True)
@@ -18,6 +17,14 @@ class Product(Base):
     stock = Column(Integer, index=True)
 
     is_active = Column(Boolean, default=True)
+
+    image_url = Column(String, nullable=True)
+
+    brand = Column(String, nullable=True)
+
+    rating = Column(Float, default=0.0)
+
+    discount_percentage = Column(Integer, default=0)
 
     category_id = Column(
         Integer,

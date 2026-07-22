@@ -67,3 +67,5 @@ def read_root():
     return {
         "message": "E-commerce API is running!"
     }
+    
+    
